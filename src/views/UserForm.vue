@@ -3,35 +3,35 @@
     <q-form @submit="saveUser">
       <q-input
         v-model="user.name"
-        label="Name"
+        :label="userFormLabels.nameLabel"
         required
       />
       <q-input
         v-model="user.email"
-        label="Email"
+        :label="userFormLabels.emailLabel"
         type="email"
         required
       />
       <q-input
         v-model="user.address"
-        label="Address"
+        :label="userFormLabels.addressLabel"
         required
       />
       <q-input
         v-model="user.phone"
-        label="Phone"
+        :label="userFormLabels.phoneLabel"
         required
       />
       <q-btn
         type="submit"
         color="primary"
-        label="Save"
+        :label="userFormLabels.saveButton"
         :loading="loading"
       />
       <q-btn
         flat
-        label="Cancel"
-        @click="$router.push('/')"
+        :label="userFormLabels.cancelButton"
+        @click="$router.push(userFormLinks.cancelUrl)"
       />
     </q-form>
   </q-page>
@@ -41,10 +41,12 @@
 import { ref, onMounted } from 'vue'
 import { useUserStore } from '../stores/user'
 import { useRouter, useRoute } from 'vue-router'
+import { useMessages } from '../composables/useMessages'
 
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
+const { labels: userFormLabels, errors: userFormErrors, links: userFormLinks } = useMessages('userForm')
 
 const user = ref({
   name: '',
@@ -75,6 +77,6 @@ const saveUser = () => {
     userStore.addUser(user.value)
   }
   loading.value = false
-  router.push('/')
+  router.push(userFormLinks.cancelUrl)
 }
 </script>

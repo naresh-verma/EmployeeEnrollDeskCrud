@@ -1,0 +1,135 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .login-btn {
+    border: 2px solid white;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.home-content {
+  flex: 1;
+}
+
+.carousel-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .carousel {
+    width: 100%;
+    max-height: 500px;
+
+    :deep(.q-carousel__slide) {
+      padding: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .slide-content {
+      text-align: center;
+      color: white;
+      max-width: 600px;
+
+      .slide-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .slide-description {
+        font-size: 1.25rem;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+.features-section {
+  background-color: #f9f9f9;
+
+  .feature-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    :deep(.q-card__section) {
+      padding: 1.5rem;
+    }
+  }
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.info-section {
+  background-color: white;
+
+  .info-box {
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #f5f7fa;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #eef2f7;
+      transform: translateY(-4px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-section {
+    .carousel {
+      max-height: 300px;
+
+      .slide-content {
+        .slide-title {
+          font-size: 1.75rem;
+        }
+
+        .slide-description {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .cta-section {
+    .flex {
+      flex-direction: column;
+    }
+  }
+}
