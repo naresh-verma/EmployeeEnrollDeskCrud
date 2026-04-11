@@ -1,11 +1,14 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useUserStore } from '../stores/user'
-import { USER_TABLE_COLUMNS } from '../constants/index'
+import { getUserTableColumns } from '../constants/index'
+import { useMessages } from './useMessages'
 
 export function useUserManagement() {
   const userStore = useUserStore()
+  const { labels: userListLabels } = useMessages('userList')
   const showDeleteDialog = ref(false)
   const userToDelete = ref(null)
+  const columns = computed(() => getUserTableColumns(userListLabels))
 
   const confirmDelete = (id) => {
     userToDelete.value = id
@@ -20,7 +23,7 @@ export function useUserManagement() {
   }
 
   return {
-    columns: USER_TABLE_COLUMNS,
+    columns,
     users: userStore.users,
     showDeleteDialog,
     userToDelete,
