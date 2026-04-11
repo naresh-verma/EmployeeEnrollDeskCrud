@@ -1,7 +1,7 @@
 <template>
   <q-card style="min-width: 400px">
     <q-card-section class="row items-center q-pb-none">
-      <div class="text-h6">Register User for Role - Step 1</div>
+      <div class="text-h6">{{ roleLabels.formTitle }}</div>
       <q-space />
       <q-btn icon="close" flat round dense @click="$emit('close')" />
     </q-card-section>
@@ -14,28 +14,28 @@
       <q-form @submit="$emit('submit', formData)">
         <q-input
           v-model="formData.companyName"
-          label="Company Name"
+          :label="roleLabels.companyNameLabel"
           required
           class="q-mb-md"
         />
 
         <q-input
           v-model="formData.jobTitle"
-          label="Job Title"
+          :label="roleLabels.jobTitleLabel"
           required
           class="q-mb-md"
         />
 
         <q-input
           v-model="formData.department"
-          label="Department"
+          :label="roleLabels.departmentLabel"
           required
           class="q-mb-md"
         />
 
         <q-input
           v-model="formData.salary"
-          label="Salary"
+          :label="roleLabels.salaryLabel"
           type="number"
           required
           class="q-mb-md"
@@ -43,7 +43,7 @@
 
         <q-input
           v-model="formData.startDate"
-          label="Start Date"
+          :label="roleLabels.startDateLabel"
           type="date"
           required
           class="q-mb-md"
@@ -51,7 +51,7 @@
 
         <q-input
           v-model="formData.description"
-          label="Role Description"
+          :label="roleLabels.descriptionLabel"
           type="textarea"
           class="q-mb-md"
         />
@@ -59,13 +59,13 @@
         <div class="row q-gutter-md">
           <q-btn
             flat
-            label="Cancel"
+            :label="roleLabels.cancelButton"
             @click="$emit('close')"
             class="col"
           />
           <q-btn
             type="submit"
-            label="Review"
+            :label="roleLabels.reviewButton"
             color="primary"
             class="col"
           />
@@ -78,6 +78,9 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { EMPTY_ROLE_FORM_DATA } from '../constants/index'
+import { useMessages } from '../composables/useMessages'
+
+const { labels: roleLabels } = useMessages('roleRegistration')
 
 const props = defineProps({
   formData: {

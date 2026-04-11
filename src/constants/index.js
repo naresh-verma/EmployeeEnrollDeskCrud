@@ -1,9 +1,9 @@
-export const USER_TABLE_COLUMNS = [
-  { name: 'name', label: 'Name', field: 'name', align: 'left' },
-  { name: 'email', label: 'Email', field: 'email', align: 'left' },
-  { name: 'address', label: 'Address', field: 'address', align: 'left' },
-  { name: 'phone', label: 'Phone', field: 'phone', align: 'left' },
-  { name: 'actions', label: 'Actions', field: 'actions', align: 'center' }
+export const getUserTableColumns = (labels) => [
+  { name: 'name', label: labels.columnName, field: 'name', align: 'left' },
+  { name: 'email', label: labels.columnEmail, field: 'email', align: 'left' },
+  { name: 'address', label: labels.columnAddress, field: 'address', align: 'left' },
+  { name: 'phone', label: labels.columnPhone, field: 'phone', align: 'left' },
+  { name: 'actions', label: labels.columnActions, field: 'actions', align: 'center' }
 ]
 
 export const EMPTY_ROLE_FORM_DATA = {
