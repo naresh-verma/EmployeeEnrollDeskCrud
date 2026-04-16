@@ -1,0 +1,46 @@
+# Continuous Integration: validates each PR/push before merge.
+name: CI
+
+on:
+  # Run on every pull request for early feedback.
+  pull_request:
+  # Also run when code is pushed directly to main.
+  push:
+    branches:
+      - main
+
+jobs:
+  # Single job that verifies test and production build health.
+  test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pull repository code into the runner workspace.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install Node and enable npm dependency cache for faster runs.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Install exact versions from package-lock.json for reproducible builds.
+      - name: Install dependencies
+        run: npm ci
+
+      # Execute unit tests once in CI mode (non-watch).
+      - name: Run unit tests
+        run: npm run test:unit -- --run
+
+      # Ensure the app can be bundled for production without errors.
+      - name: Build app
+        run: npm run build
+
+      # Store build output so it can be downloaded from the workflow run.
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: dist
