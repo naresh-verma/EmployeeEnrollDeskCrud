@@ -1,6 +1,7 @@
 name: deploy vue application
 
 on:
+  pull_request:
   push:
    branches:
    - main
