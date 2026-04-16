@@ -1,5 +1,9 @@
 <template>
   <div class="home-page">
+    <keep-alive>
+      <component :is="slideComponent" v-on:[eventName]="dynamicEvent" />
+    </keep-alive>
+
     <!-- Header Navigation -->
     <q-header elevated class="bg-gradient">
       <q-toolbar>
@@ -81,7 +85,9 @@
                 <q-icon name="app_registration" size="64px" color="primary" />
               </q-card-section>
               <q-card-section class="text-center">
-                <h5 class="text-h6 text-weight-bold">{{ homeLabels.feature1Title }}</h5>
+                <h5 class="text-h6 text-weight-bold">
+                  {{ homeLabels.feature1Title }}
+                </h5>
                 <p class="text-body2 text-grey-8">
                   {{ homeLabels.feature1Desc }}
                 </p>
@@ -96,7 +102,9 @@
                 <q-icon name="security" size="64px" color="primary" />
               </q-card-section>
               <q-card-section class="text-center">
-                <h5 class="text-h6 text-weight-bold">{{ homeLabels.feature2Title }}</h5>
+                <h5 class="text-h6 text-weight-bold">
+                  {{ homeLabels.feature2Title }}
+                </h5>
                 <p class="text-body2 text-grey-8">
                   {{ homeLabels.feature2Desc }}
                 </p>
@@ -111,7 +119,9 @@
                 <q-icon name="lock_reset" size="64px" color="primary" />
               </q-card-section>
               <q-card-section class="text-center">
-                <h5 class="text-h6 text-weight-bold">{{ homeLabels.feature3Title }}</h5>
+                <h5 class="text-h6 text-weight-bold">
+                  {{ homeLabels.feature3Title }}
+                </h5>
                 <p class="text-body2 text-grey-8">
                   {{ homeLabels.feature3Desc }}
                 </p>
@@ -124,10 +134,15 @@
       <!-- Call to Action Section -->
       <div class="cta-section bg-primary text-white q-pa-lg">
         <div class="text-center">
-          <h3 v-if="authStore.isAuthenticated" class="text-h5 text-weight-bold q-mb-md">
+          <h3
+            v-if="authStore.isAuthenticated"
+            class="text-h5 text-weight-bold q-mb-md"
+          >
             {{ homeLabels.ctaWelcomeBack }}
           </h3>
-          <h3 v-else class="text-h5 text-weight-bold q-mb-md">{{ homeLabels.ctaGetStarted }}</h3>
+          <h3 v-else class="text-h5 text-weight-bold q-mb-md">
+            {{ homeLabels.ctaGetStarted }}
+          </h3>
           <p class="text-body1 q-mb-lg">
             <span v-if="authStore.isAuthenticated">
               {{ homeLabels.ctaDescAuthenticated }}
@@ -190,7 +205,9 @@
                   color="positive"
                   class="q-mb-md"
                 />
-                <h5 class="text-h6 text-weight-bold">{{ homeLabels.infoEmployeesTitle }}</h5>
+                <h5 class="text-h6 text-weight-bold">
+                  {{ homeLabels.infoEmployeesTitle }}
+                </h5>
                 <p class="text-body2 text-grey-8">
                   {{ homeLabels.infoEmployeesDesc }}
                 </p>
@@ -204,7 +221,9 @@
                   color="info"
                   class="q-mb-md"
                 />
-                <h5 class="text-h6 text-weight-bold">{{ homeLabels.infoAdminTitle }}</h5>
+                <h5 class="text-h6 text-weight-bold">
+                  {{ homeLabels.infoAdminTitle }}
+                </h5>
                 <p class="text-body2 text-grey-8">
                   {{ homeLabels.infoAdminDesc }}
                 </p>
@@ -232,51 +251,51 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
-import { useMessages } from '../composables/useMessages'
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
+import { useMessages } from "../composables/useMessages";
 
-const router = useRouter()
-const authStore = useAuthStore()
-const { labels: homeLabels, links: homeLinks } = useMessages('home')
-const slide = ref(0)
+const router = useRouter();
+const authStore = useAuthStore();
+const { labels: homeLabels, links: homeLinks } = useMessages("home");
+const slide = ref(0);
 
 // Carousel slides with images and content
 const slides = computed(() => [
   {
     title: homeLabels.carousel.item1Title,
     description: homeLabels.carousel.item1Description,
-    image: homeLinks.carouselItem1Image
+    image: homeLinks.carouselItem1Image,
   },
   {
     title: homeLabels.carousel.item3Title,
     description: homeLabels.carousel.item3Description,
-    image: homeLinks.carouselItem3Image
+    image: homeLinks.carouselItem3Image,
   },
   {
     title: homeLabels.carousel.item2Title,
     description: homeLabels.carousel.item2Description,
-    image: homeLinks.carouselItem2Image
+    image: homeLinks.carouselItem2Image,
   },
   {
     title: homeLabels.carousel.item4Title,
     description: homeLabels.carousel.item4Description,
-    image: homeLinks.carouselItem4Image
-  }
-])
+    image: homeLinks.carouselItem4Image,
+  },
+]);
 
 const goToLogin = () => {
-  router.push(homeLinks.login)
-}
+  router.push(homeLinks.login);
+};
 
 const goToSignup = () => {
-  router.push(homeLinks.signup)
-}
+  router.push(homeLinks.signup);
+};
 
 const goToList = () => {
-  router.push(homeLinks.goToList)
-}
+  router.push(homeLinks.goToList);
+};
 </script>
 
 <style scoped src="../styles/views/home.scss" lang="scss"></style>
